@@ -97,6 +97,9 @@
 " *********************************************************************************************
 " Padalko Evgeniy 16th September 2018 v2.13
 " Added support for .bat and .cmd (windows batch) and _vimrc (vim config at windows).
+" *********************************************************************************************
+" Padalko Evgeniy 25th July 2025 v2.13
+" Added support for PlantUML .pu, .uml, .puml, .iuml and .plantuml.
 "
 
 " Exit if already loaded
@@ -188,6 +191,9 @@ function! CommentLine()
   " for windows batch files use ::
   elseif file_name =~ '\.bat$' || file_name =~ '\.cmd$'
     execute ":silent! normal ^i:: \<ESC>\<down>"
+  " for PlantUML files use '
+  elseif file_name =~ '\.pu$' || file_name =~ '\.uml$' || file_name =~ '\.puml$' || file_name =~ '\.iuml$' || file_name =~ '\.plantuml$'
+    execute ":silent! normal ^i' \<ESC>\<down>"
   " for all other files use # 
   else
     execute ":silent! normal ^i#\<ESC>\<down>^"
@@ -239,6 +245,9 @@ function! UnCommentLine()
   " for windows batch files use ::
   elseif file_name =~ '\.bat$' || file_name =~ '\.cmd$'
     execute ":silent! normal :nohlsearch\<CR>:s/:: \\?//\<CR>:nohlsearch\<CR>=="
+  " for PlantUML files use '
+  elseif file_name =~ '\.pu$' || file_name =~ '\.uml$' || file_name =~ '\.puml$' || file_name =~ '\.iuml$' || file_name =~ '\.plantuml$'
+    execute ":silent! normal :nohlsearch\<CR>:s/' \\?//\<CR>:nohlsearch\<CR>=="
   " for all other files use # 
   else
     execute ":silent! normal :nohlsearch\<CR>:s/\\#//\<CR>:nohlsearch\<CR>"
@@ -311,6 +320,9 @@ function! RangeCommentLine()
   " for windows batch files use ::
   elseif file_name =~ '\.bat$' || file_name =~ '\.cmd$'
     execute ":silent! normal ^i:: \<ESC>\<down>^"
+  " for PlantUML files use '
+  elseif file_name =~ '\.pu$' || file_name =~ '\.uml$' || file_name =~ '\.puml$' || file_name =~ '\.iuml$' || file_name =~ '\.plantuml$'
+    execute ":silent! normal ^i' \<ESC>\<down>^"
   " for all other files use #  
   else
     execute ":silent! normal :s/\\S/\\#\\0/\<CR>:nohlsearch<CR>"
@@ -361,6 +373,9 @@ function! RangeUnCommentLine()
   " for windows batch files use ::
   elseif file_name =~ '\.bat$' || file_name =~ '\.cmd$'
     execute ":silent! normal :s/:: \\?//\<CR>:nohlsearch\<CR>"
+  " for PlantUML files use '
+  elseif file_name =~ '\.pu$' || file_name =~ '\.uml$' || file_name =~ '\.puml$' || file_name =~ '\.iuml$' || file_name =~ '\.plantuml$'
+    execute ":silent! normal :s/' \\?//\<CR>:nohlsearch\<CR>"
   " for all other files use # 
   else
     execute ":silent! normal :s/\\#//\<CR>:nohlsearch\<CR>"
